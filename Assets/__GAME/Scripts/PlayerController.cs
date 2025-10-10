@@ -35,14 +35,14 @@ public class PlayerController : MonoBehaviour
 
         delta = transform.position - delta;
 
-        float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;        
+        float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
         transform.localEulerAngles = new Vector3(0, 0, angle + 90);
 
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             GameObject bullet = Instantiate(bulletPrefab);
-            
+
             bullet.transform.position = firePoint.position;
 
             bullet.GetComponent<Rigidbody2D>().linearVelocity = transform.up * bulletSpeed;
@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
 
         body.MovePosition(body.position + dir * move.magnitude * Time.deltaTime * speed);
 
-       
-        
-       
-        
+
+
+
+
     }
 }
