@@ -21,6 +21,9 @@ public class Path : MonoBehaviour
 
     void Update()
     {
+        if (!actor)
+            return;
+
         Vector2 delta = Vector2.MoveTowards(actor.position, nodes[currentNode].position, speed * Time.deltaTime);
         actor.position = delta;
 
