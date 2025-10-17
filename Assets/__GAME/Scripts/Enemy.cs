@@ -3,6 +3,31 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int hp = 3;
+    public float shootDistance = 5f;
+    public float shootSpeed = 10f;
+
+    public GameObject bulletPrefab;
+
+    PlayerController player;
+
+    void Start()
+    {
+        player = FindFirstObjectByType<PlayerController>();
+        
+    }
+
+    void Update()
+    {
+        float dist = Vector2.Distance(transform.position, player.transform.position);
+        if (dist < shootDistance)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.transform.position = transform.position;
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = direction * shootSpeed;
+        }
+    }
 
     void Damage(int amount)
     {
