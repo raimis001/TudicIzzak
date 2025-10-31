@@ -57,9 +57,19 @@ public class PlayerController : MonoBehaviour
 
         body.MovePosition(body.position + dir * move.magnitude * Time.deltaTime * speed);
 
-
-
-
-
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Door door = collision.GetComponent<Door>();
+        if (door)
+        {
+            Vector3 cam = door.targetCamera.position;
+            cam.z =  Camera.main.transform.position.z;
+            Camera.main.transform.position = cam;
+
+            transform.position = door.targetCamera.position;
+        }
+    }
+
 }
