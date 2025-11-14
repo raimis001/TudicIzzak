@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             cam.z =  Camera.main.transform.position.z;
             Camera.main.transform.position = cam;
 
-            transform.position = door.targetCamera.position;
+            transform.position = door.targetPlayer.position;
         }
     }
 
