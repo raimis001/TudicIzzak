@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 15f;
+
+    public Image transition;
 
     void OnEnable()
     {
@@ -66,10 +70,49 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 cam = door.targetCamera.position;
             cam.z =  Camera.main.transform.position.z;
-            Camera.main.transform.position = cam;
 
-            transform.position = door.targetPlayer.position;
+            StartCoroutine(Transition(cam, door.targetPlayer.position));
+ 
         }
     }
 
+    IEnumerator Transition(Vector3 camera, Vector3 player)
+    {
+        float time = 1f;
+        float current = 0f;
+
+        Color color = transition.color;
+
+        while (current < time)
+        {
+            float p = current / time;
+            current += Time.deltaTime;
+            color.a = p; 
+            transition.color = color;
+
+            yield return null;
+        }
+
+        color.a = 1f;
+        transition.color = color;
+
+        Camera.main.transform.position = camera;
+        transform.position = player;
+
+        yield return new WaitForSeconds(0.2f);
+
+        current = 0f;
+        while (current < time)
+        {
+            float p = current / time;
+            current += Time.deltaTime;
+            color.a = 1 - p;
+            transition.color = color;
+
+            yield return null;
+        }
+
+        color.a = 0f;
+        transition.color = color;
+    }
 }

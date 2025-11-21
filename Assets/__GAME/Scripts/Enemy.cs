@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
         if (dist < shootDistance)
         {
             GameObject bullet = Instantiate(bulletPrefab);
+            Destroy(bullet, 1f);
             bullet.transform.position = transform.position;
             Vector2 direction = (player.transform.position - transform.position).normalized;
 
