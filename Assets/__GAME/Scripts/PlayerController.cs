@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public float bulletSpeed = 15f;
 
+    public float HP = 1f;
+    public Image hpProgress;
+
     public Image transition;
 
     void OnEnable()
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        hpProgress.fillAmount = HP;
+
         move = controlls.ReadValue<Vector2>().normalized;
 
         Vector3 delta = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -72,7 +77,15 @@ public class PlayerController : MonoBehaviour
             cam.z =  Camera.main.transform.position.z;
 
             StartCoroutine(Transition(cam, door.targetPlayer.position));
- 
+            return;
+        }
+
+        Bullet bullet = collision.GetComponent<Bullet>();
+        if (bullet && bullet.type == BulletType.Enemy)
+        {
+            Damage(bullet.damage);
+            Destroy(collision.gameObject);
+            return;
         }
     }
 
@@ -114,5 +127,15 @@ public class PlayerController : MonoBehaviour
 
         color.a = 0f;
         transition.color = color;
+    }
+    public void Damage(float damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+            Dead();
+    }
+    public void Dead()
+    {
+        
     }
 }
