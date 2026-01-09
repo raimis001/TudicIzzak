@@ -138,4 +138,10 @@ public class PlayerController : MonoBehaviour
     {
         
     }
+    public void Heal(float heal)
+    {
+        HP += heal;
+        if (HP > 1f)
+            HP = 1f;
+    }
 }
