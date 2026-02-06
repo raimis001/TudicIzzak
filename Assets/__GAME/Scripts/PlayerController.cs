@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     public Image transition;
 
+    public GameObject deathScreen;
+
     void OnEnable()
     {
         controlls.Enable();
@@ -36,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (deathScreen.activeInHierarchy)
+            return;
+
         hpProgress.fillAmount = HP;
 
         move = controlls.ReadValue<Vector2>().normalized;
@@ -62,6 +67,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (deathScreen.activeInHierarchy)
+            return;
+
         Vector2 dir = transform.up;
 
         body.MovePosition(body.position + dir * move.magnitude * Time.deltaTime * speed);
@@ -136,7 +144,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Dead()
     {
-        
+        deathScreen.SetActive(true);
     }
     public void Heal(float heal)
     {
