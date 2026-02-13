@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (PlayerController.IsDead)
+            return;
+
         if (shootTimer > 0)
         {
             shootTimer -= Time.deltaTime;

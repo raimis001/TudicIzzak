@@ -20,6 +20,7 @@ public class ItemsContainer : MonoBehaviour
             {
                 case ItemType.HPPack:
                     collision.gameObject.GetComponentInParent<PlayerController>().Heal(value);
+                    Destroy(gameObject);
                     break;
                 
             }

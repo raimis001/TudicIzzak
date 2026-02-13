@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    static PlayerController instance;
+    public static bool IsDead => instance == null || instance.deathScreen.activeInHierarchy;
+
     public float speed = 5f;
     public InputAction controlls;
 
@@ -18,6 +21,12 @@ public class PlayerController : MonoBehaviour
     public Image transition;
 
     public GameObject deathScreen;
+
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void OnEnable()
     {
