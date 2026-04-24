@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class Item
@@ -19,7 +20,23 @@ public class InventorySlot
 public class ItemController : MonoBehaviour
 {
     public List<Item> itemList;
-    public Dictionary<int, InventorySlot> inventory;
+    public Dictionary<int, InventorySlot> inventory = new Dictionary<int, InventorySlot>();
+
+    public InputAction openKey;
+    public GameObject inventoryUI;
+
+    void OnEnable()
+    {
+        openKey.Enable();
+    }
+
+    void Update()
+    {
+        if (openKey.triggered)
+        {
+           inventoryUI.SetActive(!inventoryUI.activeInHierarchy);
+        }
+    }
 
     public void AddItem(string itemName, int count)
     {
