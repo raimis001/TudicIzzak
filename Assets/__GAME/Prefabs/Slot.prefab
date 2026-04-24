@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1054530578090375455}
   - component: {fileID: 5682090948469086719}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 8632076833202016022}
   - component: {fileID: 2230929657095528880}
   - component: {fileID: 3393444399005130616}
+  - component: {fileID: 9090798431998331564}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -427,3 +428,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9090798431998331564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335216736107743563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85fba3732bca7e74c87695840285f8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlotUI
+  icon: {fileID: 5682090948469086719}
+  caption: {fileID: 8368423449873354571}
+  count: {fileID: 7647110135175829670}
